@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- PROJECT -->
+    <groupId>no.acntech.sandbox</groupId>
+    <artifactId>acntech-big-data-sandbox</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <description>Sandbox project to explore big data use cases</description>
+
+    <!-- PROPERTIES -->
+    <properties>
+        <!-- Maven -->
+        <java.version>17</java.version>
+        <project.encoding>UTF-8</project.encoding>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
+        <downloadSources>true</downloadSources>
+        <downloadJavadocs>true</downloadJavadocs>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+
+        <revision>0.0.1-SNAPSHOT</revision>
+    </properties>
+
+    <!-- Modules -->
+    <modules>
+        <module>spring</module>
+    </modules>
+</project>
