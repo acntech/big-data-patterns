@@ -1,0 +1,4 @@
+name: acntech-twitter-source
+description: Connector to stream tweets from Twitter to Pulsar
+sourceClass: no.acntech.sandbox.pulsar.TwitterSource
+sourceConfigClass: no.acntech.sandbox.pulsar.TwitterSourceConfig

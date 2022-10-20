@@ -1,0 +1,15 @@
+### Spring ###
+spring:
+  pulsar:
+    brokers:
+      - localhost:6650
+
+### Logging ###
+logging:
+  level:
+    org.springframework: INFO
+    no.acntech: DEBUG
+
+### Server ###
+server:
+  port: 8081

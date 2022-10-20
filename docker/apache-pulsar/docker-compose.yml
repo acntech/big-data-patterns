@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  acntech.pulsar:
+    image: apachepulsar/pulsar:latest
+    container_name: acntech.pulsar
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+    volumes:
+      - pulsar.conf:/pulsar/conf
+      - pulsar.data:/pulsar/data
+      - ../../apache-pulsar/twitter-source-connector/target/apache-pulsar-twitter-source-connector-0.0.1-SNAPSHOT.nar:/pulsar/connectors/apache-pulsar-twitter-source-connector-0.0.1-SNAPSHOT.nar
+    networks:
+      - pulsar
+    command: ./bin/pulsar standalone
+
+volumes:
+  pulsar.conf:
+    name: acntech.pulsar.conf
+  pulsar.data:
+    name: acntech.pulsar.data
+
+networks:
+  pulsar:
+    name: acntech.pulsar
