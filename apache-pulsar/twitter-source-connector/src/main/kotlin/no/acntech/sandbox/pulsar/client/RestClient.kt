@@ -1,54 +1,46 @@
 package no.acntech.sandbox.pulsar.client
 
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.slf4j.LoggerFactory
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.time.Duration
+import java.util.concurrent.Flow
 
 internal class RestClient private constructor(
         private val client: HttpClient,
         private val bearerToken: String
 ) {
 
-    private val objectMapper = jacksonObjectMapper()
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-
     @Suppress("FunctionName")
-    fun <T> GET(url: String, returnType: Class<T>): T {
+    fun <T> GET(url: String, bodyHandler: HttpResponse.BodyHandler<T>): HttpResponse<T> {
         val request = HttpRequest.newBuilder()
                 .GET().uri(URI.create(url))
                 .header("Accept", "application/json")
                 .header("Authorization", "Bearer $bearerToken")
                 .build()
-        val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-        return objectMapper.readValue(response.body(), returnType)
+        return client.send(request, bodyHandler)
     }
 
     @Suppress("FunctionName")
-    fun <T> POST(url: String, body: Any, returnType: Class<T>): T {
-        val bodyString = objectMapper.writeValueAsString(body)
+    fun <T> POST(url: String, body: String, bodyHandler: HttpResponse.BodyHandler<T>): HttpResponse<T> {
         val request = HttpRequest.newBuilder()
-                .POST(HttpRequest.BodyPublishers.ofString(bodyString)).uri(URI.create(url))
+                .POST(HttpRequest.BodyPublishers.ofString(body)).uri(URI.create(url))
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .header("Authorization", "Bearer $bearerToken")
                 .build()
-        val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-        return objectMapper.readValue(response.body(), returnType)
+        return client.send(request, bodyHandler)
     }
 
     @Suppress("FunctionName")
-    fun <T> STREAM(url: String, consumer: (data: T) -> Unit, returnType: Class<T>): HttpResponse<Void> {
+    fun STREAM(url: String, subscriber: Flow.Subscriber<String>): HttpResponse<Void> {
         val request = HttpRequest.newBuilder()
                 .GET().uri(URI.create(url))
                 .header("Accept", "application/json")
                 .header("Authorization", "Bearer $bearerToken")
                 .build()
-        val subscriber = JsonSubscriber(objectMapper, consumer, returnType)
         return client.send(request, HttpResponse.BodyHandlers.fromLineSubscriber(subscriber))
     }
 

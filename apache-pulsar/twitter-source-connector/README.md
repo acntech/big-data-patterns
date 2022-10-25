@@ -5,5 +5,5 @@
   --name acntech-twitter-source \
   --source-type acntech-twitter-source \
   --destinationTopicName tweets \
-  --source-config '{"bearerToken":<BEARER_TOKEN>}'
+  --source-config '{"bearer_token":"<BEARER_TOKEN>"}'
 ```

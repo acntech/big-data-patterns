@@ -1,6 +1,7 @@
 package no.acntech.sandbox.pulsar.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.apache.commons.lang3.StringUtils
 import org.slf4j.LoggerFactory
 import java.util.concurrent.Flow
 
@@ -21,11 +22,11 @@ class JsonSubscriber<T>(
 
     override fun onNext(item: String?) {
         counter++
-        if (item != null) {
+        if (StringUtils.isNotBlank(item)) {
             val data: T = objectMapper.readValue(item, type)
             this.consumer(data)
         } else {
-            LOGGER.info("Received empty tweet!")
+            LOGGER.debug("Received empty tweet!")
         }
         if (counter % 100L == 0L) {
             LOGGER.info("Consumed $counter tweets")

@@ -11,6 +11,7 @@ import org.apache.pulsar.io.core.SourceContext
 import org.apache.pulsar.io.core.annotations.Connector
 import org.apache.pulsar.io.core.annotations.IOType
 import org.slf4j.LoggerFactory
+import java.time.Duration
 
 @Connector(
         name = "acntech-twitter-source",
@@ -23,26 +24,27 @@ class TwitterSource : PushSource<Tweet>() {
     private var twitterClient: TwitterClient? = null
 
     override fun open(config: MutableMap<String, Any>?, sourceContext: SourceContext?) {
-        LOGGER.info("Starting Twitter source connector...")
-        val sourceConfig = IOConfigUtils
-                .loadWithSecrets(config, TwitterSourceConfig::class.java, sourceContext)
-        start(sourceConfig)
-    }
-
-    private fun start(sourceConfig: TwitterSourceConfig) = runBlocking {
-        twitterClient = TwitterClient.builder()
-                .rootUrl("https://api.twitter.com")
-                .bearerToken(sourceConfig.bearerToken)
-                .build()
-        launch {
-            twitterClient!!.getStream { tweet ->
-                consume(TweetRecord(tweet))
+        runBlocking {
+            LOGGER.info("Starting Twitter source connector")
+            val sourceConfig = IOConfigUtils
+                    .loadWithSecrets(config, TwitterSourceConfig::class.java, sourceContext)
+            twitterClient = TwitterClient.builder()
+                    .rootUrl("https://api.twitter.com")
+                    .connectTimeout(Duration.ofMillis(sourceConfig.connectTimeout))
+                    .bearerToken(sourceConfig.bearerToken)
+                    .build()
+            launch {
+                twitterClient!!.getStream { tweet ->
+                    consume(TweetRecord(tweet))
+                }
             }
+            LOGGER.info("Twitter source connector started")
         }
     }
 
     override fun close() {
         LOGGER.info("Closing Twitter source connector")
+        LOGGER.info("Twitter source closed")
     }
 
     companion object {
