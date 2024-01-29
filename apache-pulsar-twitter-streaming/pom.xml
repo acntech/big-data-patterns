@@ -6,11 +6,11 @@
     <!-- PROJECT -->
     <parent>
         <groupId>no.acntech.sandbox</groupId>
-        <artifactId>acntech-big-data-sandbox</artifactId>
+        <artifactId>acntech-big-data-patterns</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>apache-pulsar</artifactId>
+    <artifactId>apache-pulsar-twitter-streaming</artifactId>
     <packaging>pom</packaging>
 
     <!-- MODULES -->

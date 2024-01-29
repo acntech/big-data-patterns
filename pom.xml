@@ -5,7 +5,7 @@
 
     <!-- PROJECT -->
     <groupId>no.acntech.sandbox</groupId>
-    <artifactId>acntech-big-data-sandbox</artifactId>
+    <artifactId>acntech-big-data-patterns</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
@@ -15,7 +15,7 @@
     <properties>
         <!-- General -->
         <revision>0.0.1-SNAPSHOT</revision>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <kotlin.version>1.7.20</kotlin.version>
         <kotlinx.version>1.6.4</kotlinx.version>
         <project.encoding>UTF-8</project.encoding>
@@ -28,12 +28,7 @@
         <spring-boot.version>2.7.5</spring-boot.version>
         <spring-cloud.version>2021.0.4</spring-cloud.version>
         <springdoc.version>1.6.9</springdoc.version>
-        <logback.version>1.4.4</logback.version>
-        <jackson.version>2.13.4</jackson.version>
         <apache-pulsar.version>2.10.2</apache-pulsar.version>
-        <junit.version>5.9.1</junit.version>
-        <assertj.version>3.23.1</assertj.version>
-        <mockwebserver.version>4.10.0</mockwebserver.version>
 
         <!-- Plugins -->
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -43,6 +38,76 @@
 
     <!-- MODULES -->
     <modules>
-        <module>apache-pulsar</module>
+        <module>apache-pulsar-twitter-streaming</module>
     </modules>
+
+    <!-- DEPENDENCY -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-client</artifactId>
+                <version>${apache-pulsar.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-io-common</artifactId>
+                <version>${apache-pulsar.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-bom</artifactId>
+                <version>${kotlin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- BUILD -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${kotlin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.nifi</groupId>
+                    <artifactId>nifi-nar-maven-plugin</artifactId>
+                    <version>${nifi-nar-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
