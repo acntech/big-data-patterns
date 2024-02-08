@@ -1,11 +1,16 @@
 ### Spring ###
 spring:
+  # Application
+  application:
+    name: apache-pulsar-spring-boot-twitter-consumer
+  # Pulsar
   pulsar:
     brokers:
       - localhost:6650
 
 ### Logging ###
 logging:
+  # Level
   level:
     org.springframework: INFO
     no.acntech: DEBUG

@@ -1,0 +1,7 @@
+CREATE USER 'acntech_debezium'@'%' IDENTIFIED BY 'abcd1234';
+
+GRANT SELECT,RELOAD,REPLICATION SLAVE,REPLICATION CLIENT,SUPER ON *.* TO 'acntech_debezium'@'%';
+
+FLUSH PRIVILEGES;
+
+SHOW GRANTS for acntech_debezium;

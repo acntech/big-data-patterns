@@ -10,12 +10,12 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>apache-pulsar-twitter-streaming</artifactId>
+    <artifactId>apache-kafka-cdc-event-stream</artifactId>
     <packaging>pom</packaging>
 
     <!-- MODULES -->
     <modules>
-        <module>twitter-source-connector</module>
-        <module>spring-boot-twitter-consumer</module>
+        <module>mastodon-consumer</module>
+        <module>event-stream-pipeline</module>
     </modules>
 </project>

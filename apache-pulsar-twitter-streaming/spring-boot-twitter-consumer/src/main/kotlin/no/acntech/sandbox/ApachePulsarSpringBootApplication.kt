@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class SpringBootApachePulsarApplication
+class ApachePulsarSpringBootApplication
 
 fun main(args: Array<String>) {
-    runApplication<SpringBootApachePulsarApplication>(*args)
+    runApplication<ApachePulsarSpringBootApplication>(*args)
 }

@@ -16,29 +16,31 @@
         <!-- General -->
         <revision>0.0.1-SNAPSHOT</revision>
         <java.version>21</java.version>
-        <kotlin.version>1.7.20</kotlin.version>
-        <kotlinx.version>1.6.4</kotlinx.version>
+        <kotlin.version>1.9.22</kotlin.version>
+        <kotlinx.version>1.7.3</kotlinx.version>
         <project.encoding>UTF-8</project.encoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <kotlin.compiler.jvmTarget>${java.version}</kotlin.compiler.jvmTarget>
         <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
 
         <!-- Dependencies -->
-        <spring-boot.version>2.7.5</spring-boot.version>
-        <spring-cloud.version>2021.0.4</spring-cloud.version>
-        <springdoc.version>1.6.9</springdoc.version>
-        <apache-pulsar.version>2.10.2</apache-pulsar.version>
+        <spring-boot.version>3.2.2</spring-boot.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
+        <springdoc.version>1.7.0</springdoc.version>
+        <apache-pulsar.version>3.1.2</apache-pulsar.version>
 
         <!-- Plugins -->
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <nifi-nar-maven-plugin.version>1.3.5</nifi-nar-maven-plugin.version>
+        <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <nifi-nar-maven-plugin.version>1.5.1</nifi-nar-maven-plugin.version>
     </properties>
 
     <!-- MODULES -->
     <modules>
         <module>apache-pulsar-twitter-streaming</module>
+        <module>apache-kafka-cdc-event-stream</module>
     </modules>
 
     <!-- DEPENDENCY -->
