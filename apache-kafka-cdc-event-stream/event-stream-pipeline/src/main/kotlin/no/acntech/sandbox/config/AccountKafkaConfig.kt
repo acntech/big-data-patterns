@@ -5,7 +5,6 @@ import no.acntech.sandbox.model.AccountEvent
 import no.acntech.sandbox.model.EventEnvelope
 import no.acntech.sandbox.model.EventKey
 import no.acntech.sandbox.model.EventValue
-import no.acntech.sandbox.processor.AccountKafkaStreamProcessor
 import org.apache.kafka.streams.StreamsBuilder
 import org.apache.kafka.streams.Topology
 import org.apache.kafka.streams.kstream.Consumed
@@ -57,11 +56,12 @@ class AccountKafkaConfig {
     fun accountKafkaStreamsTopology(streamsBuilder: StreamsBuilder,
                                     properties: AppKafkaProperties,
                                     @Qualifier("eventKeySerde") keySerde: JsonSerde<EventEnvelope<EventKey>>,
-                                    @Qualifier("accountEventValueSerde") valueSerde: JsonSerde<EventEnvelope<EventValue<AccountEvent>>>,
-                                    accountKafkaStreamProcessor: AccountKafkaStreamProcessor): Topology {
+                                    @Qualifier("accountEventValueSerde") valueSerde: JsonSerde<EventEnvelope<EventValue<AccountEvent>>>): Topology {
         val statusKafkaStream = streamsBuilder.stream(properties.stream.accountSourceTopic, Consumed.with(keySerde, valueSerde))
 
-        statusKafkaStream.foreach(accountKafkaStreamProcessor::process)
+        statusKafkaStream
+                .filter { key, value -> key != null && value != null }
+                .foreach { key, value -> LOGGER.info("Received Account Change Event $key with value $value") }
 
         LOGGER.info("Created Status Kafka Streams Topology")
 

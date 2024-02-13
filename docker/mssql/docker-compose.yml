@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  acntech.mssql:
+    image: mcr.microsoft.com/mssql/server
+    container_name: acntech.mssql
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: P455w0rd
+      MSSQL_PID: Developer
+    ports:
+      - "1433:1433"
+    networks:
+      - mssql
+
+volumes:
+  mssql.data:
+    name: acntech.mssql.data
+
+networks:
+  mssql:
+    name: acntech.mssql

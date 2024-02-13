@@ -6,9 +6,9 @@ services:
     container_name: acntech.mysql
     environment:
       MYSQL_USER: acntech
-      MYSQL_PASSWORD: abcd1234
+      MYSQL_PASSWORD: P455w0rd
       MYSQL_DATABASE: acntech
-      MYSQL_ROOT_PASSWORD: abcd1234
+      MYSQL_ROOT_PASSWORD: P455w0rd
     command: --lower_case_table_names=1 --log-bin=bin.log --log-bin-index=bin.log.index --binlog_do_db=acntech
     ports:
       - "3306:3306"

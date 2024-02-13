@@ -14,7 +14,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/acntech
     username: acntech
-    password: abcd1234
+    password: P455w0rd
+  # Flyway
+  flyway:
+    locations:
+      - classpath:db/vendor/mysql
 
 ### Logging ###
 logging:

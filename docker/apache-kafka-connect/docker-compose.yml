@@ -39,7 +39,7 @@ services:
       - kafka-connect.jars:/etc/kafka-connect/jars
     networks:
       - kafka
-      - mysql
+      - mssql
 
 volumes:
   kafka.secrets:
@@ -55,6 +55,6 @@ networks:
   kafka:
     name: acntech.kafka
     external: true
-  mysql:
-    name: acntech.mysql
+  mssql:
+    name: acntech.mssql
     external: true

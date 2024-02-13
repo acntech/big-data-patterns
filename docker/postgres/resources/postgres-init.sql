@@ -1,0 +1,4 @@
+CREATE USER acntech WITH PASSWORD 'P455w0rd';
+CREATE USER acntech_debezium WITH PASSWORD 'P455w0rd';
+
+CREATE DATABASE acntech WITH OWNER acntech;

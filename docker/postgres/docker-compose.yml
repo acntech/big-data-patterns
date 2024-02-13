@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  acntech.postgres:
+    image: postgres
+    container_name: acntech.postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: P455w0rd
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./resources/postgres-init.sql:/docker-entrypoint-initdb.d/postgres-init.sql
+      - acntech.postgres.data:/var/lib/postgresql/data
+    networks:
+      - acntech.postgres
+
+volumes:
+  acntech.postgres.data:
+    name: acntech.postgres.data
+
+networks:
+  acntech.postgres:
+    name: acntech.postgres
